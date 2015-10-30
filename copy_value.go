@@ -16,8 +16,7 @@ func copyRecursively(dst, src reflect.Value) {
 		for i := 0; i < src.NumField(); i++ {
 			s := src.Field(i)
 			d := dst.FieldByName(src.Type().Field(i).Name)
-			zero := reflect.Value{}
-			if d != zero {
+			if d.IsValid() {
 				copyRecursively(d, s)
 			}
 		}
